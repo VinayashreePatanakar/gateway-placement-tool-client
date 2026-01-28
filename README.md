@@ -1,54 +1,104 @@
-# Gateway Placement Tool (Signal Page)
+# Gateway Placement Tool – Client (Frontend)
 
-An interactive and collaborative web-based site map tool that allows DAZOQ and customers to upload floor plans, calibrate scale, and place sensors, gateways, and repeaters visually.  
-This tool replaces the previous manual workflow using Figma, PDFs, and Notion.
-
----
-
-## 🚀 Project Overview
-
-The Gateway Placement Tool is part of the **Signal page** and is designed to:
-
-- Upload and manage floor plans (blueprints)
-- Calibrate and lock map scale
-- Place and manage sensors, gateways, and repeaters
-- Persist placements in a database
-- Support collaboration between DAZOQ admins and customers
-- Provide a foundation for versioning, export, and equipment documentation
+This is the frontend application for the **Gateway Placement Tool**, an interactive site map feature used in the Signal page.  
+It allows users and DAZOQ admins to upload floor plans, calibrate scale, and visually place sensors, gateways, and repeaters.
 
 ---
 
-## 🧩 Tech Stack
+## Tech Stack
 
-### Frontend
 - React (Vite)
 - JavaScript (ES6+)
 - Context API
 - Custom state store
 - HTML5 / CSS3
 
-### Backend
-- PHP (API-based)
-- Session-based authentication
-- MySQL
+---
+
+## Project Structure
+src/
+├── assets/ # Static assets
+├── components/ # Shared & admin components
+│ ├── AuthContext.jsx
+│ ├── ProtectedRoute.jsx
+│ ├── SiteMap.jsx # Core interactive map logic
+│ ├── Login.jsx
+│ ├── Register.jsx
+│ └── ...
+│
+├── componentsForUsers/ # Customer-facing UI
+│ ├── Signal.jsx
+│ ├── MapPage.jsx
+│ ├── Equipment.jsx
+│ └── ...
+│
+├── layouts/ # Layout wrappers
+│ ├── RootLayout.jsx
+│ └── UserLayout.jsx
+│
+├── pages/ # Page-level views
+│ ├── admin/
+│ ├── FloorSelection/
+│ ├── History/
+│ └── Home/
+│
+├── router/
+│ └── router.jsx # App routing
+│
+├── store/
+│ └── mapStore.js # Central map & element state
+│
+├── App.jsx
+└── main.jsx
+
 
 ---
 
-## 📁 Repository Structure
-gateway-placement-tool-client/
-├── src/
-│ ├── assets/
-│ ├── components/
-│ ├── componentsForUsers/
-│ ├── layouts/
-│ ├── pages/
-│ ├── router/
-│ ├── store/
-│ ├── App.jsx
-│ └── main.jsx
-├── package.json
-├── vite.config.js
-└── README.md
+## User Roles
 
-### Frontend – `gateway-placement-tool-client`
+- **Admin (DAZOQ)**  
+  - Access all customers and floors  
+  - Troubleshooting and support  
+
+- **User (Customer)**  
+  - Upload floor plans  
+  - Place sensors, gateways, repeaters  
+
+Access control is enforced via `AuthContext` and `ProtectedRoute`.
+
+---
+
+## Core Features
+
+- Upload and manage floor plans
+- Scale calibration and locking
+- Drag & drop placement of:
+  - Sensors
+  - Gateways
+  - Repeaters
+- Rename and remove elements
+- Multi-floor support
+- Persistent state synced with backend
+
+---
+
+## Backend Integration
+
+The frontend communicates with a PHP backend via REST-style endpoints:
+- Authentication (login/logout/session)
+- Floor CRUD operations
+- Element placement persistence
+- File uploads
+
+API base URLs may need adjustment per environment.
+
+---
+
+## Running the Project
+
+### Install dependencies
+```bash
+npm install
+
+npm run dev
 
